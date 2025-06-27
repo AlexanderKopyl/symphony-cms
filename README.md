@@ -47,7 +47,7 @@ To run the project you need PHP and Composer installed:
 
 ```bash
 composer install
-php bin/console doctrine:database:create --if-not-exists
-php bin/console doctrine:schema:update --force
+./bin/console doctrine:database:create --if-not-exists
+./bin/console doctrine:schema:update --force
 symfony server:start
 ```
