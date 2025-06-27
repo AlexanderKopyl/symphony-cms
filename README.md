@@ -1,6 +1,6 @@
 # symphony-cms
 
-This example uses **Symfony 7.3** and demonstrates Onion architecture with
+This example uses **Symfony 7** and demonstrates Onion architecture with
 Domain, Application, Infrastructure and Controller layers. Doctrine ORM stores
 `Article` and `User` entities in a SQLite database.
 
