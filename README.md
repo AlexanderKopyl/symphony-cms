@@ -1,8 +1,8 @@
 # symphony-cms
 
-This example uses **Symfony 7.3**, the latest minor version at the time of
-writing. It demonstrates Onion architecture with Domain, Application,
-Infrastructure and Controller layers.
+This example uses **Symfony 7.3** and demonstrates Onion architecture with
+Domain, Application, Infrastructure and Controller layers. Doctrine ORM stores
+`Article` and `User` entities in a SQLite database.
 
 ## Structure
 
@@ -20,19 +20,23 @@ src/
 - **SharedKernel** provides common utilities like slug generation and UUIDs.
 - **Application** contains use cases.
 - **Infrastructure** provides concrete implementations.
-- **Controller** exposes HTTP endpoints.
+- **Controller** exposes only the admin dashboard; the API is handled by API Platform.
 
 ## Example
 
-The route `/articles` returns a JSON list of article titles using an in-memory repository.
-The route `/users` returns a JSON list of usernames from an in-memory repository.
 
-API Platform exposes entities under `/api`, enabling JSON-LD HAL output for the `Article` resource.
-EasyAdmin provides an example admin dashboard at `/admin`.
+API Platform exposes all entities under `/api`. Authentication is performed via
+JWT at `/api/login`. The admin dashboard is available at `/admin` thanks to
+EasyAdmin.
+
+Translations reside under `translations/`. Example English and French files
+demonstrate localised article strings.
 
 To run the project you need PHP and Composer installed:
 
 ```bash
 composer install
+php bin/console doctrine:database:create --if-not-exists
+php bin/console doctrine:schema:update --force
 symfony server:start
 ```

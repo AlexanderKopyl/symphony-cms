@@ -2,22 +2,50 @@
 
 namespace App\UserDomain\Entity;
 
-use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\ApiResource;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
+#[ORM\Entity]
 #[ApiResource]
-class User
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[ApiProperty(identifier: true)]
-    private string $username;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
 
-    public function __construct(string $username)
+    #[ORM\Column(unique: true)]
+    private string $username = '';
+
+    #[ORM\Column]
+    private string $password = '';
+
+    public function getId(): ?int
     {
-        $this->username = $username;
+        return $this->id;
     }
 
-    public function getUsername(): string
+    public function getUserIdentifier(): string
     {
         return $this->username;
+    }
+
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    public function eraseCredentials(): void {}
+
+    public function getRoles(): array
+    {
+        return ['ROLE_USER'];
     }
 }
