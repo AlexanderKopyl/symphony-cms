@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Infrastructure\Repository;
+namespace App\ArticleDomain\Infrastructure\Persistence;
 
-use App\ArticleDomain\Entity\Article;
-use App\ArticleDomain\Repository\ArticleRepositoryInterface;
+use App\ArticleDomain\Domain\Model\Article;
+use App\ArticleDomain\Domain\Repository\ArticleRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 
 class DoctrineArticleRepository implements ArticleRepositoryInterface

@@ -9,17 +9,28 @@ Domain, Application, Infrastructure and Controller layers. Doctrine ORM stores
 ```
 src/
     ArticleDomain/
+        Domain/
+            Model/
+            Repository/
+        Application/
+            Service/
+        Infrastructure/
+            Persistence/
     UserDomain/
+        Domain/
+            Model/
+            Repository/
+        Application/
+            Service/
+        Infrastructure/
+            Persistence/
     SharedKernel/
-    Application/
-    Infrastructure/
     Controller/
 ```
 
-- **ArticleDomain** and **UserDomain** hold entities and repository interfaces.
+- **ArticleDomain** and **UserDomain** contain domain models, repository
+  interfaces, application services and infrastructure for each domain.
 - **SharedKernel** provides common utilities like slug generation and UUIDs.
-- **Application** contains use cases.
-- **Infrastructure** provides concrete implementations.
 - **Controller** exposes only the admin dashboard; the API is handled by API Platform.
 
 ## Example
