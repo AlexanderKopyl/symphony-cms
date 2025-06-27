@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application;
+namespace App\UserDomain\Application\Service;
 
-use App\UserDomain\Repository\UserRepositoryInterface;
+use App\UserDomain\Domain\Repository\UserRepositoryInterface;
 
 class GetUsers
 {

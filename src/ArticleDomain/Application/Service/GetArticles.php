@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Application;
+namespace App\ArticleDomain\Application\Service;
 
-use App\ArticleDomain\Repository\ArticleRepositoryInterface;
+use App\ArticleDomain\Domain\Repository\ArticleRepositoryInterface;
 
 class GetArticles
 {

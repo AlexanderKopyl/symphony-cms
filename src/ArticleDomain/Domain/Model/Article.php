@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ArticleDomain\Entity;
+namespace App\ArticleDomain\Domain\Model;
 
 use ApiPlatform\Metadata\ApiResource;
 use Doctrine\ORM\Mapping as ORM;

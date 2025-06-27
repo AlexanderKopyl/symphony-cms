@@ -1,8 +1,8 @@
 <?php
 
-namespace App\ArticleDomain\Repository;
+namespace App\ArticleDomain\Domain\Repository;
 
-use App\ArticleDomain\Entity\Article;
+use App\ArticleDomain\Domain\Model\Article;
 
 interface ArticleRepositoryInterface
 {
