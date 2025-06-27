@@ -52,5 +52,7 @@
 /.web-server-pid
 
 auth.json
-Makfile
 .idea/
+.env.*.local
+.env.local
+/Makefile

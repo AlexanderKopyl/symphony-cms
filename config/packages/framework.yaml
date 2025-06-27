@@ -1,0 +1,42 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
+framework:
+    session:
+        # ID of the service used for session storage
+        # NULL means that Symfony uses PHP default session mechanism
+        handler_id: null
+        # improves the security of the cookies used for sessions
+        cookie_secure: auto
+        cookie_samesite: lax
+        storage_factory_id: session.storage.factory.native
+    secret: '%env(APP_SECRET)%'
+    #csrf_protection: true
+    http_method_override: false
+
+    # trust *all* requests (the 'REMOTE_ADDR' string is replaced at runtime by $_SERVER['REMOTE_ADDR'])
+    trusted_proxies: '127.0.0.1,REMOTE_ADDR'
+
+    #esi: true
+    #fragments: true
+    php_errors:
+        log: true
+
+#    messenger:
+#        reset_on_message: true
+
+when@dev:
+    framework:
+        http_cache: true
+
+when@prod:
+    framework:
+        http_cache: true
+
+when@stg:
+    framework:
+        http_cache: true
+
+when@test:
+    framework:
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file
