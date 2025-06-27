@@ -56,3 +56,5 @@ auth.json
 .env.*.local
 .env.local
 /Makefile
+/config/jwt/private.pem
+/config/jwt/public.pem
