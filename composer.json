@@ -8,7 +8,7 @@
         "symfony/orm-pack": "^2.0",
         "symfony/security-bundle": "^7.0",
         "symfony/translation": "^7.0",
-        "api-platform/api-pack": "^3.0",
+        "api-platform/api-pack": "^1.4",
         "easycorp/easyadmin-bundle": "^4.0",
         "lexik/jwt-authentication-bundle": "^2.20",
         "gesdinet/jwt-refresh-token-bundle": "^1.0",
