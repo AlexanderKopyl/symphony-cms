@@ -20,7 +20,18 @@ security:
             pattern: ^/api
             stateless: true
             jwt: ~
+        admin:
+            lazy: true
+            provider: app_user_provider
+            pattern: ^/
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                default_target_path: /admin
+            logout:
+                path: app_logout
     access_control:
+        - { path: ^/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/token/refresh, roles: PUBLIC_ACCESS }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
