@@ -1,0 +1,17 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/Kernel.php'
+
+    App\ArticleDomain\Repository\ArticleRepositoryInterface: '@App\\Infrastructure\\Repository\\DoctrineArticleRepository'
+    App\UserDomain\Repository\UserRepositoryInterface: '@App\\Infrastructure\\Repository\\DoctrineUserRepository'
+    App\SharedKernel\Service\SlugGeneratorInterface: '@App\SharedKernel\Service\SlugGenerator'
+    App\SharedKernel\Service\UuidGeneratorInterface: '@App\SharedKernel\Service\UuidGenerator'
+    App\SharedKernel\Service\DateTimeProviderInterface: '@App\SharedKernel\Service\DateTimeProvider'
+    App\SharedKernel\Service\EventDispatcherInterface: '@App\SharedKernel\Service\EventDispatcher'
