@@ -31,3 +31,18 @@ services:
         tags: [ 'doctrine.repository_service' ]
     App\UserDomain\Domain\Repository\UserRepositoryInterface:
         alias: App\UserDomain\Infrastructure\Repository\UserRepository
+    App\Shared\Application\Cqrs\CommandBus:
+        arguments:
+            $handlers: !tagged_iterator 'cqrs.command_handler'
+        tags: [ 'default' ]
+
+    App\Shared\Application\Cqrs\QueryBus:
+        arguments:
+            $handlers: !tagged_iterator 'cqrs.query_handler'
+        tags: [ 'default' ]
+
+    App\UserDomain\Application\Command\CreateUser\CreateUserHandler:
+        tags: [ { name: 'cqrs.command_handler' } ]
+
+    App\UserDomain\Application\Query\GetUser\GetUserByIdHandler:
+        tags: [ { name: 'cqrs.query_handler' } ]

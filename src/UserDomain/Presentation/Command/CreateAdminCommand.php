@@ -4,23 +4,20 @@ declare(strict_types=1);
 
 namespace App\UserDomain\Presentation\Command;
 
-use App\UserDomain\Domain\Model\User;
-use App\UserDomain\Domain\Repository\UserRepositoryInterface;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Shared\Application\Cqrs\CommandBusInterface;
+use App\UserDomain\Application\Command\CreateUser\CreateUserCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[AsCommand(name: 'app:create-admin', description: 'Create a new admin user')]
 class CreateAdminCommand extends Command
 {
     public function __construct(
-        private readonly UserRepositoryInterface $userRepository,
-        private readonly UserPasswordHasherInterface $passwordHasher,
+        private readonly CommandBusInterface $commandBus
     ) {
         parent::__construct();
     }
@@ -45,19 +42,15 @@ class CreateAdminCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $user = new User();
-        $email = $input->getArgument('email');
-        $user->setEmail($email);
-        $username = strstr($email, '@', true);
-        $user->setUsername($username);
-        $user->setRoles(['ROLE_ADMIN']);
-        $user->setPassword(
-            $this->passwordHasher->hashPassword($user, $input->getArgument('password'))
-        );
+        $this->commandBus->dispatch(new CreateUserCommand(
+            email: $input->getArgument('email'),
+            password: $input->getArgument('password'),
+            roles: ['ROLE_ADMIN']
+        ));
 
-        $this->userRepository->save($user, true);
-
-        $output->writeln(sprintf('<info>АAdmin "%s" was successfully created</info>', $email));
+        $output->writeln(sprintf(
+            '<info>Admin "%s" was successfully created</info>', $input->getArgument('email')
+        ));
 
         return Command::SUCCESS;
     }
