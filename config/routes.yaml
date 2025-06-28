@@ -3,6 +3,11 @@ user_domain:
     type: attribute
     prefix: /api
 
+admin_domain:
+    resource: '../src/AdminDomain/Presentation/Controller/'
+    type: attribute
+    prefix: /admin
+
 api_login_check:
     path: /api/login_check
 

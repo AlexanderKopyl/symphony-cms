@@ -46,3 +46,5 @@ services:
 
     App\UserDomain\Application\Query\GetUser\GetUserByIdHandler:
         tags: [ { name: 'cqrs.query_handler' } ]
+    App\UserDomain\Application\Query\GetUser\GetAllUsersQueryHandler:
+        tags: [ { name: 'cqrs.query_handler' } ]
