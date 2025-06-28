@@ -15,6 +15,13 @@ services:
     # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
+        exclude:
+            - '../src/**/Domain/'
+            - '../src/**/Infrastructure/Persistence/Doctrine/Entity/' # если есть кастомные Doctrine entity
+            - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # Явная регистрация репозитория (если вдруг не подхватывается)
+    App\UserDomain\Infrastructure\Repository\UserRepository:
+        arguments:
+            $registry: '@doctrine'
+        tags: ['doctrine.repository_service']
