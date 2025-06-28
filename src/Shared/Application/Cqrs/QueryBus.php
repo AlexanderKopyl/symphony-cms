@@ -17,7 +17,7 @@ class QueryBus implements QueryBusInterface
     public function ask(QueryInterface $query): mixed
     {
         foreach ($this->handlers as $handler) {
-            if ($query instanceof QueryHandlerInterface
+            if ($handler instanceof QueryHandlerInterface
                 && is_a($query, (new \ReflectionClass($handler))
                     ->getMethod('__invoke')->getParameters()[0]->getType()->getName(), true)) {
 
