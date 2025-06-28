@@ -20,9 +20,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private string $password;
 
-    #[ORM\Column]
-    private string $role;
-
     #[ORM\Column(nullable: true)]
     private ?string $firstName = null;
 

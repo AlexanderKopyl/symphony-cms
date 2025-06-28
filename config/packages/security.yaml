@@ -26,8 +26,11 @@ security:
             pattern: ^/api
             stateless: true
             jwt: ~
+            refresh_jwt: ~
+            entry_point: jwt
     access_control:
         - { path: ^/api/login$, roles: PUBLIC_ACCESS }
+        - { path: ^/api/user/logout, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
 
 when@test:

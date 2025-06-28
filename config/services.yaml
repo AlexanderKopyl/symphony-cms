@@ -25,3 +25,7 @@ services:
         arguments:
             $registry: '@doctrine'
         tags: ['doctrine.repository_service']
+    App\UserDomain\Infrastructure\Repository\RefreshTokenRepository:
+        arguments:
+            $registry: '@doctrine'
+        tags: [ 'doctrine.repository_service' ]
