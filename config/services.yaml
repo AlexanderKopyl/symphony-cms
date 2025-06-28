@@ -29,3 +29,5 @@ services:
         arguments:
             $registry: '@doctrine'
         tags: [ 'doctrine.repository_service' ]
+    App\UserDomain\Domain\Repository\UserRepositoryInterface:
+        alias: App\UserDomain\Infrastructure\Repository\UserRepository

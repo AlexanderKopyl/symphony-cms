@@ -5,14 +5,15 @@ namespace App\UserDomain\Domain\Model;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Uid\Ulid;
 
 #[ORM\Entity]
 #[ORM\Table(name: 'users')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-    #[ORM\Id, ORM\GeneratedValue, ORM\Column]
-    private int $id;
-
+    #[ORM\Id]
+    #[ORM\Column(type: 'ulid', unique: true)]
+    private Ulid $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private string $email;
@@ -40,6 +41,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(unique: true)]
     private string $username;
+
+    public function __construct()
+    {
+        $this->id = new Ulid();
+    }
 
     public function getPassword(): ?string
     {
@@ -90,12 +96,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getUserIdentifier();
     }
 
-    public function getId(): int
+    public function getId(): Ulid
     {
         return $this->id;
     }
 
-    public function setId(int $id): void
+    public function setId(Ulid $id): void
     {
         $this->id = $id;
     }

@@ -5,12 +5,15 @@ namespace App\UserDomain\Infrastructure\Repository;
 use App\UserDomain\Domain\Model\User;
 use App\UserDomain\Domain\Repository\UserRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 class UserRepository extends ServiceEntityRepository implements UserRepositoryInterface
 {
-    public function __construct(ManagerRegistry $registry)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        ManagerRegistry $registry
+    ) {
         parent::__construct($registry, User::class);
     }
 
@@ -26,19 +29,19 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
 
     public function save(User $user, bool $flush = false): void
     {
-        $this->_em->persist($user);
+        $this->em->persist($user);
 
         if ($flush) {
-            $this->_em->flush();
+            $this->em->flush();
         }
     }
 
     public function remove(User $user, bool $flush = false): void
     {
-        $this->_em->remove($user);
+        $this->em->remove($user);
 
         if ($flush) {
-            $this->_em->flush();
+            $this->em->flush();
         }
     }
 }

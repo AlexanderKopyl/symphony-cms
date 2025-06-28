@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\UserDomain\Presentation\Command;
 
 use App\UserDomain\Domain\Model\User;
+use App\UserDomain\Domain\Repository\UserRepositoryInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -18,8 +19,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class CreateAdminCommand extends Command
 {
     public function __construct(
-        private readonly EntityManagerInterface $em,
-        private readonly UserPasswordHasherInterface $passwordHarsher
+        private readonly UserRepositoryInterface $userRepository,
+        private readonly UserPasswordHasherInterface $passwordHasher,
     ) {
         parent::__construct();
     }
@@ -51,11 +52,10 @@ class CreateAdminCommand extends Command
         $user->setUsername($username);
         $user->setRoles(['ROLE_ADMIN']);
         $user->setPassword(
-            $this->passwordHarsher->hashPassword($user, $input->getArgument('password'))
+            $this->passwordHasher->hashPassword($user, $input->getArgument('password'))
         );
 
-        $this->em->persist($user);
-        $this->em->flush();
+        $this->userRepository->save($user, true);
 
         $output->writeln(sprintf('<info>АAdmin "%s" was successfully created</info>', $email));
 
