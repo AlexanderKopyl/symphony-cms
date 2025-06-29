@@ -2,18 +2,13 @@
 
 namespace App\UserDomain\Domain\Model;
 
-use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gesdinet\JWTRefreshTokenBundle\Entity\RefreshToken as BaseRefreshToken;
-use App\UserDomain\Infrastructure\Repository\RefreshTokenRepository;
 
-#[ORM\Entity(repositoryClass: RefreshTokenRepository::class)]
+#[ORM\Entity]
 #[ORM\Table(name: 'refresh_tokens')]
 class RefreshToken extends BaseRefreshToken
 {
-    /**
-     * @inheritdoc
-     */
     #[ORM\Id]
     #[ORM\Column(type: 'integer')]
     #[ORM\GeneratedValue]
@@ -22,18 +17,18 @@ class RefreshToken extends BaseRefreshToken
     /**
      * @var string|null
      */
-    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\Column(type: 'string', nullable: false)]
     protected $refreshToken;
 
     /**
      * @var string|null
      */
-    #[ORM\Column(type: 'string', nullable: true)]
+    #[ORM\Column(type: 'string', nullable: false)]
     protected $username;
 
     /**
-     * @var DateTimeInterface|null
+     * @var \DateTimeInterface|null
      */
-    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(type: 'datetime', nullable: false)]
     protected $valid;
 }

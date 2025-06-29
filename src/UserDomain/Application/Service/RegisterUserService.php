@@ -6,5 +6,4 @@ namespace App\UserDomain\Application\Service;
 
 class RegisterUserService
 {
-
 }

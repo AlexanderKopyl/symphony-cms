@@ -3,18 +3,17 @@
 namespace App\UserDomain\Infrastructure\Repository;
 
 use App\UserDomain\Domain\Model\RefreshToken;
+use App\UserDomain\Domain\Repository\RefreshTokenRepositoryInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Gesdinet\JWTRefreshTokenBundle\Doctrine\RefreshTokenRepositoryInterface;
 
 class RefreshTokenRepository extends ServiceEntityRepository implements RefreshTokenRepositoryInterface
 {
     public function __construct(
         private readonly EntityManagerInterface $em,
-        ManagerRegistry $registry
-    )
-    {
+        ManagerRegistry $registry,
+    ) {
         parent::__construct($registry, RefreshToken::class);
     }
 
@@ -35,5 +34,10 @@ class RefreshTokenRepository extends ServiceEntityRepository implements RefreshT
         if ($flush) {
             $this->em->flush();
         }
+    }
+
+    public function findByUsername(string $username): array
+    {
+        return $this->findBy(['username' => $username]);
     }
 }

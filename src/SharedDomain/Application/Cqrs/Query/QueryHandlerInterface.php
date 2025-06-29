@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Shared\Application\Cqrs\Query;
+namespace App\SharedDomain\Application\Cqrs\Query;
 
 interface QueryHandlerInterface
 {

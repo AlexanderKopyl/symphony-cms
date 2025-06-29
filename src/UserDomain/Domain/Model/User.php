@@ -89,7 +89,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * Для обратной совместимости со старым UserInterface
+     * Для обратной совместимости со старым UserInterface.
      */
     public function getUsername(): string
     {

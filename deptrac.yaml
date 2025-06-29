@@ -1,0 +1,119 @@
+deptrac:
+  paths:
+    - ./src
+  exclude_files:
+    - '#.*Test.*#'
+    - '#.*fixtures.*#'
+
+  layers:
+    # === PRESENTATION ===
+    - name: AdminPresentation
+      collectors:
+        - type: classLike
+          value: ^App\\AdminDomain\\Presentation\\.*
+
+    - name: UserPresentation
+      collectors:
+        - type: classLike
+          value: ^App\\UserDomain\\Presentation\\.*
+
+    # === APPLICATION ===
+    - name: Application
+      collectors:
+        - type: classLike
+          value: ^App\\(?!SharedDomain)\\.*Domain\\Application\\(?!.*Handler).*
+
+    - name: CommandHandler
+      collectors:
+        - type: classLike
+          value: ^App\\.*Domain\\Application\\Command\\.*Handler$
+
+    - name: QueryHandler
+      collectors:
+        - type: classLike
+          value: ^App\\.*Domain\\Application\\Query\\.*Handler$
+
+    # === SHARED APPLICATION ===
+    - name: SharedApplication
+      collectors:
+        - type: classLike
+          value: ^App\\SharedDomain\\Application\\.*
+
+    # === DOMAIN ===
+    - name: Domain
+      collectors:
+        - type: classLike
+          value: ^App\\.*Domain\\Domain\\.*
+
+    # === INFRASTRUCTURE ===
+    - name: Infrastructure
+      collectors:
+        - type: classLike
+          value: ^App\\.*Domain\\Infrastructure\\.*
+
+    # === SHARED ===
+    - name: Shared
+      collectors:
+        - type: classLike
+          value: ^App\\SharedDomain\\(?!Application)(?!Infrastructure).*
+
+  ruleset:
+    Presentation:
+      - Application
+      - Shared
+      - SharedApplication
+
+    AdminPresentation:
+      - Application
+      - Shared
+      - SharedApplication
+
+    UserPresentation:
+      - Application
+      - Shared
+      - SharedApplication
+
+    Application:
+      - Domain
+      - Shared
+      - SharedApplication
+
+    CommandHandler:
+      - Application
+      - Domain
+      - Shared
+      - SharedApplication
+
+    QueryHandler:
+      - Application
+      - Domain
+      - Shared
+      - SharedApplication
+
+    Domain:
+      - Shared
+      - SharedApplication
+
+    Infrastructure:
+      - Domain
+      - Shared
+      - SharedApplication
+
+    Shared:
+      - Shared
+      - SharedApplication
+
+    SharedApplication:
+      - Shared
+      - SharedApplication
+
+    # Модульная изоляция: запрещаем пересечения между доменами
+    App\AdminDomain\.*:
+      - App\AdminDomain\.*
+      - Shared
+      - SharedApplication
+
+    App\UserDomain\.*:
+      - App\UserDomain\.*
+      - Shared
+      - SharedApplication

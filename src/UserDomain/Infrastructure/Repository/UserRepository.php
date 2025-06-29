@@ -12,7 +12,7 @@ class UserRepository extends ServiceEntityRepository implements UserRepositoryIn
 {
     public function __construct(
         private readonly EntityManagerInterface $em,
-        ManagerRegistry $registry
+        ManagerRegistry $registry,
     ) {
         parent::__construct($registry, User::class);
     }

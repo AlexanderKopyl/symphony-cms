@@ -3,8 +3,9 @@
 namespace App\UserDomain\Domain\Repository;
 
 use App\UserDomain\Domain\Model\User;
+use Doctrine\Persistence\ObjectRepository;
 
-interface UserRepositoryInterface
+interface UserRepositoryInterface extends ObjectRepository
 {
     public function findOneByEmail(string $email): ?User;
 

@@ -25,26 +25,42 @@ services:
         arguments:
             $registry: '@doctrine'
         tags: ['doctrine.repository_service']
+        public: true
     App\UserDomain\Infrastructure\Repository\RefreshTokenRepository:
         arguments:
             $registry: '@doctrine'
         tags: [ 'doctrine.repository_service' ]
+        public: true
     App\UserDomain\Domain\Repository\UserRepositoryInterface:
         alias: App\UserDomain\Infrastructure\Repository\UserRepository
-    App\Shared\Application\Cqrs\CommandBus:
+    App\SharedDomain\Application\Cqrs\CommandBus:
         arguments:
             $handlers: !tagged_iterator 'cqrs.command_handler'
         tags: [ 'default' ]
 
-    App\Shared\Application\Cqrs\QueryBus:
+    App\SharedDomain\Application\Cqrs\QueryBus:
         arguments:
             $handlers: !tagged_iterator 'cqrs.query_handler'
         tags: [ 'default' ]
 
     App\UserDomain\Application\Command\CreateUser\CreateUserHandler:
         tags: [ { name: 'cqrs.command_handler' } ]
+    App\UserDomain\Application\Command\Logout\LogoutUserHandler:
+        tags: [ { name: 'cqrs.command_handler' } ]
 
-    App\UserDomain\Application\Query\GetUser\GetUserByIdHandler:
+    App\UserDomain\Application\Query\GetUser\GetUserByUsernameHandler:
         tags: [ { name: 'cqrs.query_handler' } ]
-    App\UserDomain\Application\Query\GetUser\GetAllUsersQueryHandler:
+    App\UserDomain\Application\Query\GetAllUsers\GetAllUsersQueryHandler:
         tags: [ { name: 'cqrs.query_handler' } ]
+
+    App\UserDomain\Domain\Repository\RefreshTokenRepositoryInterface: '@App\UserDomain\Infrastructure\Repository\RefreshTokenRepository'
+    Gesdinet\JWTRefreshTokenBundle\Doctrine\RefreshTokenRepositoryInterface: '@App\UserDomain\Infrastructure\Repository\RefreshTokenRepository'
+
+    App\SharedDomain\Infrastructure\Doctrine\CustomRepositoryFactory:
+        arguments:
+            $container: '@service_container'
+            $repositoryServiceMap:
+                App\UserDomain\Domain\Model\RefreshToken: App\UserDomain\Infrastructure\Repository\RefreshTokenRepository
+                App\UserDomain\Domain\Model\User: App\UserDomain\Infrastructure\Repository\UserRepository
+        public: true
+

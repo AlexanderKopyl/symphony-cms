@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\UserDomain\Presentation\Command;
 
-use App\Shared\Application\Cqrs\CommandBusInterface;
+use App\SharedDomain\Application\Cqrs\CommandBusInterface;
 use App\UserDomain\Application\Command\CreateUser\CreateUserCommand;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -17,7 +18,7 @@ use Symfony\Component\Console\Question\Question;
 class CreateAdminCommand extends Command
 {
     public function __construct(
-        private readonly CommandBusInterface $commandBus
+        private readonly CommandBusInterface $commandBus,
     ) {
         parent::__construct();
     }
@@ -35,7 +36,9 @@ class CreateAdminCommand extends Command
             $question = new Question('Put password: ');
             $question->setHidden(true);
             $question->setHiddenFallback(false);
-            $password = $this->getHelper('question')->ask($input, $output, $question);
+            /** @var QuestionHelper $helper */
+            $helper = $this->getHelper('question');
+            $password = $helper->ask($input, $output, $question);
             $input->setArgument('password', $password);
         }
     }

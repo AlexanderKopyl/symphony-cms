@@ -1,25 +1,25 @@
 doctrine:
     dbal:
-        url: '%env(resolve:DATABASE_URL)%'
-        profiling_collect_backtrace: '%kernel.debug%'
-        use_savepoints: true
+        default_connection: default
+        connections:
+            default:
+                url: '%env(resolve:DATABASE_URL)%'
+                charset: utf8mb4
 
     orm:
         auto_generate_proxy_classes: true
-        enable_lazy_ghost_objects: true
-        report_fields_where_declared: true
-        validate_xml_mapping: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
-        identity_generation_preferences:
-            Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
-        auto_mapping: false
-        mappings:
-            UserDomain:
-                is_bundle: false
-                type: attribute
-                dir: '%kernel.project_dir%/src/UserDomain/Domain/Model'
-                prefix: 'App\UserDomain\Domain\Model'
-                alias: UserDomain
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                mappings:
+                    UserDomain:
+                        is_bundle: false
+                        type: attribute
+                        dir: '%kernel.project_dir%/src/UserDomain/Domain/Model'
+                        prefix: 'App\UserDomain\Domain\Model'
+                        alias: UserDomain
+                repository_factory: App\SharedDomain\Infrastructure\Doctrine\CustomRepositoryFactory
 
 when@test:
     doctrine:

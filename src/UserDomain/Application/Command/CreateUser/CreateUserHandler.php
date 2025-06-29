@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace App\UserDomain\Application\Command\CreateUser;
 
-
-use App\Shared\Application\Cqrs\Command\CommandHandlerInterface;
-use App\Shared\Application\Cqrs\Command\CommandInterface;
+use App\SharedDomain\Application\Cqrs\Command\CommandHandlerInterface;
+use App\SharedDomain\Application\Cqrs\Command\CommandInterface;
 use App\UserDomain\Domain\Model\User;
 use App\UserDomain\Domain\Repository\UserRepositoryInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -15,9 +14,13 @@ class CreateUserHandler implements CommandHandlerInterface
 {
     public function __construct(
         private readonly UserRepositoryInterface $userRepository,
-        private readonly UserPasswordHasherInterface $passwordHasher
-    ) {}
+        private readonly UserPasswordHasherInterface $passwordHasher,
+    ) {
+    }
 
+    /**
+     * @param CreateUserCommand $command
+     */
     public function __invoke(CommandInterface $command): void
     {
         $user = new User();
