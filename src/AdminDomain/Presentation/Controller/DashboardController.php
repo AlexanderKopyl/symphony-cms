@@ -6,13 +6,13 @@ namespace App\AdminDomain\Presentation\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class DashboardController extends AbstractController
 {
     #[Route(path: '/', name: 'admin_dashboard')]
     public function index(): Response
     {
-        return $this->render('@Admin/theme/spike/main/dashboard.html.twig');
+        return $this->render('@Admin/main/dashboard.html.twig');
     }
 }

@@ -12,12 +12,8 @@
  * The "importmap:require" command can be used to add new entries to this file.
  */
 return [
-    '@admin/app' => [
+    '@admin/admin' => [
         'path' => './src/AdminDomain/Presentation/Resources/assets/admin.js',
-        'entrypoint' => true,
-    ],
-    '@admin/one' => [
-        'path' => './src/AdminDomain/Presentation/Resources/assets/one.js',
         'entrypoint' => true,
     ],
     'jquery' => [

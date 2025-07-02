@@ -23,7 +23,7 @@ class UserController extends AbstractController
     {
         $users = $this->queryBus->ask(new GetAllUsersQuery());
 
-        return $this->render('@Admin/theme/spike/user/list.html.twig', [
+        return $this->render('@Admin/user/list.html.twig', [
             'users' => $users,
         ]);
     }
