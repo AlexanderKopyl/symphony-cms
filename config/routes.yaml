@@ -6,7 +6,9 @@ user_domain:
 admin_domain:
     resource: '../src/AdminDomain/Presentation/Controller/'
     type: attribute
-    prefix: /admin
+    prefix: '/{_locale}/admin'
+    requirements:
+        _locale: 'en|ru|uk'
 
 api_login_check:
     path: /api/login_check
