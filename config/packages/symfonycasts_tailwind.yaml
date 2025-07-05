@@ -2,7 +2,7 @@ symfonycasts_tailwind:
     input_css:
         - '%kernel.project_dir%/src/AdminDomain/Presentation/Resources/assets/styles/admin.css'
     config_file: '%kernel.project_dir%/tailwind.config.js'
-    binary: '%kernel.project_dir%/var/tailwind/v4.1.11/tailwindcss-linux-x64'
+    binary: '%env(resolve:TAILWIND_BINARY)%'
     binary_version: 'v4.1.11'
     # Alternatively, you can specify the path to the binary that you manage yourself
     #binary: 'node_modules/.bin/tailwindcss'

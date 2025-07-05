@@ -3,7 +3,6 @@ twig:
     default_path: '%kernel.project_dir%/templates'
     paths:
         '%kernel.project_dir%/src/AdminDomain/Presentation/Templates': Admin
-        '%kernel.project_dir%/src/UserDomain/Presentation/Templates': User
 
 when@test:
     twig:
