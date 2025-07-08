@@ -1,0 +1,22 @@
+<header class="bg-gray-900 text-white shadow-sm w-full z-10">
+    <div class="container mx-auto flex items-center justify-between px-4 py-3">
+        <!-- Левый блок -->
+        <div class="flex items-center gap-4">
+            <span class="font-bold text-lg whitespace-nowrap">CMS Admin</span>
+        </div>
+
+        <!-- Переключатель языков -->
+        <div class="flex items-center gap-2">
+            {% set current_route = app.request.attributes.get('_route') %}
+            {% set current_params = app.request.attributes.get('_route_params') %}
+            {% set locales = supported_locales %}
+
+            {% for locale in locales %}
+                <a href="{{ path(current_route, current_params|merge({'_locale': locale})) }}"
+                   class="text-sm px-3 py-1 rounded {{ app.request.locale == locale ? 'bg-blue-600 text-white' : 'text-gray-300 hover:bg-gray-700' }}">
+                    {{ locale|upper }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</header>

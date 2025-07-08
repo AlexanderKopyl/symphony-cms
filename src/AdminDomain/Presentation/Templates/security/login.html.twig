@@ -1,0 +1,49 @@
+{# templates/admin/login.html.twig #}
+{% extends '@Admin/layout/base.html.twig' %}
+
+{% block title %}{{ 'admin.login.title'|trans }}{% endblock %}
+
+{% block body %}
+    <div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+        <div class="max-w-md w-full bg-white rounded-lg shadow-md p-8">
+            <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">
+                {{ 'admin.login.heading'|trans }}
+            </h2>
+
+            {% if error %}
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+            <form method="post" action="{{ path('admin_login', {'_locale': app.request.locale}) }}" class="space-y-6">
+                <div>
+                    <label for="username" class="block text-sm font-medium text-gray-700">
+                        {{ 'admin.login.username'|trans }}
+                    </label>
+                    <input type="text" name="_username" id="username"
+                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                           required autofocus value="{{ last_username }}">
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">
+                        {{ 'admin.login.password'|trans }}
+                    </label>
+                    <input type="password" name="_password" id="password"
+                           class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+                           required>
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+
+                <div>
+                    <button type="submit"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md transition">
+                        {{ 'admin.login.submit'|trans }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

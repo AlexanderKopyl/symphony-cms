@@ -1,0 +1,7 @@
+admin:
+    login:
+        title: 'Вхід до адмін-панелі'
+        heading: 'Авторизація'
+        username: 'Ім’я користувача'
+        password: 'Пароль'
+        submit: 'Увійти'

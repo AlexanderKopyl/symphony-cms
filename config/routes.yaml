@@ -10,6 +10,10 @@ admin_domain:
     requirements:
         _locale: 'en|ru|uk'
 
+root_redirect:
+    path: /
+    controller: App\SharedDomain\Presentation\Controller\RootRedirectController
+
 api_login_check:
     path: /api/login_check
 

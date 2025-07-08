@@ -1,3 +1,7 @@
-admin.login.title: 'Вход'
-admin.login.email: 'Почта'
-admin.login.password: 'Пароль'
+admin:
+  login:
+    title: 'Вход в админ-панель'
+    heading: 'Авторизация'
+    username: 'Имя пользователя'
+    password: 'Пароль'
+    submit: 'Войти'

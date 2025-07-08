@@ -1,3 +1,14 @@
-admin.login.title: 'Enter'
-admin.login.email: 'Email'
-admin.login.password: 'password'
+admin:
+    login:
+        title: 'Admin Panel Login'
+        heading: 'Authentication'
+        username: 'Username'
+        password: 'Password'
+        submit: 'Log In'
+    dashboard:
+        title: "Dashboard"
+        welcome: "Welcome to Admin Panel"
+        users: "User Management"
+        users_description: "Manage admin users, roles, and permissions."
+        settings: "Settings"
+        settings_description: "System configurations and options."

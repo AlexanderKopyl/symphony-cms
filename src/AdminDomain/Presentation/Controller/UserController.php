@@ -9,6 +9,7 @@ use App\UserDomain\Application\Query\GetAllUsers\GetAllUsersQuery;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/users', name: 'admin_user_')]
 class UserController extends AbstractController
@@ -21,9 +22,13 @@ class UserController extends AbstractController
     #[Route('/', name: 'index')]
     public function list(): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            return $this->redirectToRoute('admin_login');
+        }
+
         $users = $this->queryBus->ask(new GetAllUsersQuery());
 
-        return $this->render('@Admin/user/list.html.twig', [
+        return $this->render('@Admin/user/index.html.twig', [
             'users' => $users,
         ]);
     }
