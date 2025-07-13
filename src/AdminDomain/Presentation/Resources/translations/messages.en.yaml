@@ -8,7 +8,28 @@ admin:
     dashboard:
         title: "Dashboard"
         welcome: "Welcome to Admin Panel"
+        description: "Manage your CMS content and settings from here"
         users: "User Management"
         users_description: "Manage admin users, roles, and permissions."
+        content: "Content Management"
+        content_description: "Manage pages, posts, and media files."
         settings: "Settings"
         settings_description: "System configurations and options."
+        recent_activity: "Recent Activity"
+        no_recent_activity: "No recent activity to display."
+    users:
+        title: "Users"
+        description: "Manage system users and their permissions"
+        id: "ID"
+        username: "Username"
+        email: "Email"
+        roles: "Roles"
+        created_at: "Created At"
+        actions: "Actions"
+    navigation:
+        dashboard: "Dashboard"
+        users: "Users"
+        content: "Content"
+        settings: "Settings"
+        logout: "Logout"
+
